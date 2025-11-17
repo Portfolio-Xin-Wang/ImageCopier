@@ -6,7 +6,7 @@ from src import ImageCopier
 # If images are found, return names
 names = os.listdir("./test_images")
 
-copier = ImageCopier("./output/")
+copier = ImageCopier()
 
 copier.basic_perform("./test_images", names, 20)
 

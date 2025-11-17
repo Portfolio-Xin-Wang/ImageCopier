@@ -10,7 +10,7 @@ class ImageCopier:
     output_direction: str
     rotation_name: str
     _angle: int
-    def __init__(self, output_direction: str) -> None:
+    def __init__(self, output_direction: str = "./output/") -> None:
         self.output_direction = output_direction
         self.rotation_name = "{file}=rot-{rotation}.jpg"
         self._angle = 0
