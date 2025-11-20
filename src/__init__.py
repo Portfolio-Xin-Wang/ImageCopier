@@ -1,3 +1,3 @@
-from .image_copier import ImageCopier
-
-__init__ = [ImageCopier]
+from src.services.image_copier import ImageCopier
+from .services.ImageRepository import ImageRepository, LocalFileStorage
+__init__ = [ImageCopier, LocalFileStorage, ImageRepository]

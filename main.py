@@ -1,12 +1,12 @@
-import os
-
-from src import ImageCopier
-# Lookup for image names
+from src import ImageCopier, LocalFileStorage
 
 # If images are found, return names
-names = os.listdir("./test_images")
+repo = LocalFileStorage(image_directory="test_images")
+copier = ImageCopier(image_repo=repo)
 
-copier = ImageCopier()
+copier.basic_perform("output", 1)
+mapi = {"entity.py": 1}
+test = "./image/entity.py"
 
-copier.basic_perform("./test_images", names, 20)
+print(mapi.get(test, 0))
 
