@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from Domain import ImageEntity
+from ..Domain import ImageEntity
 
 class ImageExporter(ABC):
 

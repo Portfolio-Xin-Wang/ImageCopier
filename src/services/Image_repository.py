@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from PIL import Image
-from Domain import PILImageEntity, ImageEntity, map_name_to_id, ImageMetadata
+from ..Domain import PILImageEntity, ImageEntity, map_name_to_id, ImageMetadata
 import os
 
 from pathlib import Path

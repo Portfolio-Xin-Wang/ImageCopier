@@ -3,7 +3,7 @@ import traceback
 
 from PIL import Image
 from .Image_repository import ImageRepository
-from Domain import ImageMetadata, ImageEntity, PILImageEntity
+from ..Domain import ImageMetadata, ImageEntity, PILImageEntity
 
 class ImageCopier:
     """
