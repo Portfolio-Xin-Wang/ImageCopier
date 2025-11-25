@@ -2,9 +2,8 @@ import os
 import traceback
 
 from PIL import Image
-from ..services.ImageRepository import ImageRepository
-from ..domain.ImageEntity import ImageEntity, PILImageEntity
-
+from .Image_repository import ImageRepository
+from Domain import ImageMetadata, ImageEntity, PILImageEntity
 
 class ImageCopier:
     """
@@ -25,18 +24,26 @@ class ImageCopier:
         """
         This is the basic class that looks up images and makes a copy of them like image_1|rot-5.jpg
         """
-        succes = 0
-        failed = 0
         # Currently extracting a concrete type. Later this responsibility will be moved to a transformer class
         images: list[PILImageEntity] = self.image_repository.get()
+        # Export function: format metadata
+        transformed_images: list[PILImageEntity] = []
 
         for entity in images:
-            new_angle = self._apply_rotation(copies)
-            format_out = self._format_output_file(entity, new_angle)
-            processed_image: Image = entity.image.rotate(new_angle)
-            output_file_name = f"{directory}/{format_out}"
-            self._copy_image(processed_image, output_file_name)
+            for i in range(copies):
+                new_angle = self._apply_rotation(copies)
+                format_out = self._format_output_file(entity, new_angle)
+                processed_image: Image = entity.image.rotate(new_angle)
+                # Export function
+                output_file_name = f"{directory}/{format_out}"
+                self._copy_image(processed_image, output_file_name)
+                # Export function: format metadata
+                new_entity = entity.deep_copy()
+                new_entity.meta_data = ImageMetadata(entity.meta_data.label_id, format_out, directory)
+                transformed_images.append(new_entity)
+        return transformed_images
 
+    # Export function
     @staticmethod
     def _copy_image(image: Image, output_name: str) -> None:
         try:
@@ -48,7 +55,7 @@ class ImageCopier:
             return False
 
     def _format_output_file(self, entity: ImageEntity, angle: int) -> str:
-        return self.transformed_name.format(label_id=entity.label_id, file=entity.image_name, rotation=angle,
+        return self.transformed_name.format(label_id=entity.meta_data.label_id, file=entity.return_image_name(), rotation=angle,
                                             extension="jpg")
 
     def _apply_rotation(self, number: int) -> int:

@@ -1,8 +1,6 @@
-import traceback
 from abc import ABC, abstractmethod
 from PIL import Image
-from ..domain.ImageEntity import PILImageEntity, ImageEntity
-from ..domain.map_names import map_name_to_id
+from Domain import PILImageEntity, ImageEntity, map_name_to_id, ImageMetadata
 import os
 
 from pathlib import Path
@@ -60,7 +58,8 @@ class LocalFileStorage(ImageRepository):
         for image_location in images:
             image = Image.open(location.format(data_dir=source, name=image_location))
             label_id = map_name_to_id(image_location)
-            entity = PILImageEntity(image, image_location, source, label_id)
+            meta_data = ImageMetadata(label_id, image_location, source)
+            entity = PILImageEntity(image, meta_data)
             _pil_image.append(entity)
         return _pil_image
 
@@ -69,8 +68,8 @@ class LocalFileStorage(ImageRepository):
         for image in images:
             # Future check if file with a extension is a directory or folder and a directory
             file = Path(image)
-            isImage = self.IMAGE_FORMATS.get(file.suffix)
-            if isImage:
+            is_image = self.IMAGE_FORMATS.get(file.suffix)
+            if is_image:
                 # Returns in format file_name.jpg for example
                 _images.append(file.name)
         return _images
