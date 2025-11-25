@@ -3,6 +3,7 @@ import traceback
 
 from PIL import Image
 from .Image_repository import ImageRepository
+from .image_exporter import ImageExporter
 from ..Domain import ImageMetadata, ImageEntity, PILImageEntity
 
 class ImageCopier:
@@ -20,7 +21,7 @@ class ImageCopier:
         self._angle = 0
         self.image_repository = image_repo
 
-    def basic_perform(self, directory, copies: int):
+    def basic_perform(self, directory, copies: int = 2, exporter: ImageExporter = None) -> list[PILImageEntity]:
         """
         This is the basic class that looks up images and makes a copy of them like image_1|rot-5.jpg
         """
@@ -30,17 +31,21 @@ class ImageCopier:
         transformed_images: list[PILImageEntity] = []
 
         for entity in images:
+            # This implemenation should be redundant if transformer class is implemented
             for i in range(copies):
                 new_angle = self._apply_rotation(copies)
                 format_out = self._format_output_file(entity, new_angle)
+                # Should be reformatted into own transformer class
                 processed_image: Image = entity.image.rotate(new_angle)
                 # Export function
                 output_file_name = f"{directory}/{format_out}"
-                self._copy_image(processed_image, output_file_name)
                 # Export function: format metadata
                 new_entity = entity.deep_copy()
                 new_entity.meta_data = ImageMetadata(entity.meta_data.label_id, format_out, directory)
                 transformed_images.append(new_entity)
+                self._copy_image(processed_image, output_file_name)
+        # Export function if selected
+        exporter.export(transformed_images) if exporter else None
         return transformed_images
 
     # Export function
