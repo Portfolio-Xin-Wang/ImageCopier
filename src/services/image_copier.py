@@ -1,10 +1,6 @@
-import os
-import traceback
-
 from PIL import Image
 from .Image_repository import ImageRepository
-from .image_exporter import ImageExporter
-from ..Domain import ImageMetadata, ImageEntity, PILImageEntity
+from ..Domain import PILImageEntity
 
 class ImageCopier:
     """
@@ -21,7 +17,7 @@ class ImageCopier:
         self._angle = 0
         self.image_repository = image_repo
 
-    def basic_perform(self, directory, copies: int = 2, exporter: ImageExporter = None) -> list[PILImageEntity]:
+    def basic_perform(self, copies: int = 2) -> list[PILImageEntity]:
         """
         This is the basic class that looks up images and makes a copy of them like image_1|rot-5.jpg
         """
@@ -33,35 +29,16 @@ class ImageCopier:
         for entity in images:
             # This implemenation should be redundant if transformer class is implemented
             for i in range(copies):
-                new_angle = self._apply_rotation(copies)
-                format_out = self._format_output_file(entity, new_angle)
-                # Should be reformatted into own transformer class
-                processed_image: Image = entity.image.rotate(new_angle)
-                # Export function
-                output_file_name = f"{directory}/{format_out}"
-                # Export function: format metadata
                 new_entity = entity.deep_copy()
-                new_entity.meta_data = ImageMetadata(entity.meta_data.label_id, format_out, directory)
+                new_angle = self._apply_rotation(copies)
+                # Transformation function: Should be reformatted into own transformer class
+                new_entity.meta_data.add_transformation("copy", i)
+                new_entity.meta_data.add_transformation("rot", new_angle)
+                processed_image: Image = entity.image.rotate(new_angle)
+                # Transformation function: format metadata
+                new_entity.image = processed_image
                 transformed_images.append(new_entity)
-                self._copy_image(processed_image, output_file_name)
-        # Export function if selected
-        exporter.export(transformed_images) if exporter else None
         return transformed_images
-
-    # Export function
-    @staticmethod
-    def _copy_image(image: Image, output_name: str) -> None:
-        try:
-            # output
-            image.save(output_name)
-            return True
-        except:
-            traceback.print_exc()
-            return False
-
-    def _format_output_file(self, entity: ImageEntity, angle: int) -> str:
-        return self.transformed_name.format(label_id=entity.meta_data.label_id, file=entity.return_image_name(), rotation=angle,
-                                            extension="jpg")
 
     def _apply_rotation(self, number: int) -> int:
         angle = 360 / (number + 1)
@@ -69,13 +46,6 @@ class ImageCopier:
         if self._angle > 360:
             self._reset()
         return self._angle
-
-    def _create_directory_if_not_exists(self, directory: str) -> str:
-        if not os.path.exists(directory):
-            print(f"Created directory: {directory}")
-            os.makedirs(f"{self.output_direction}{directory}")
-            return directory
-        return directory
 
     def _reset(self):
         self._angle = 0

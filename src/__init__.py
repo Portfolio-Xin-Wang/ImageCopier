@@ -1,3 +1,5 @@
-from .services.image_copier import ImageCopier
 from .services.Image_repository import ImageRepository, LocalFileStorage
-__init__ = [ImageCopier, LocalFileStorage, ImageRepository]
+from .services.image_copier import ImageCopier
+from .services.image_exporter import ImageExporter, LocalImageExporter
+
+__init__ = [ImageCopier, LocalFileStorage, ImageRepository, ImageExporter, LocalImageExporter]

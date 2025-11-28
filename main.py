@@ -1,14 +1,12 @@
-from src import ImageCopier, LocalFileStorage
+from src import ImageCopier, LocalFileStorage, LocalImageExporter
+
+from src.Domain import ImageMetadata
 # If images are found, return names
+
 repo = LocalFileStorage(image_directory="test_images")
 copier = ImageCopier(image_repo=repo)
+exporter = LocalImageExporter(copier=copier, output_direction="output")
 
-collection = copier.basic_perform("output", 4)
-mapi = {"entity.py": 1}
-test = "./image/entity.py"
+entities = exporter.export()
 
-print(mapi.get(test, 0))
-
-print(len(collection))
-print(collection)
 
