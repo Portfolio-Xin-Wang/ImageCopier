@@ -21,7 +21,7 @@ class ImageEntity(ABC):
 
     @abstractmethod
     def deep_copy(self):
-        return ImageEntity(self.meta_data)
+        pass
 
 
 class PILImageEntity(ImageEntity):

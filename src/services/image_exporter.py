@@ -6,6 +6,8 @@ from ..Domain import ImageEntity, PILImageEntity
 
 from .image_copier import ImageCopier
 
+from transformers import Transformer
+
 class ImageExporter(ABC):
 
     @abstractmethod
@@ -47,12 +49,11 @@ class LocalImageExporter(ImageExporter):
         return directory
     
     # Export function
-    def _copy_image(self, image: PILImageEntity) -> None:
+    def _copy_image(self, entity: PILImageEntity) -> None:
         try:
-            output_name = self._format_output_file(image)
+            output_name = self._format_output_file(entity)
             # output
-            image.image.save(output_name)
-            return True
+            entity.image.save(output_name)
         except:
             traceback.print_exc()
-            return False
+            raise
