@@ -1,4 +1,9 @@
 class ImageMetadata:
+    """
+    Class to hold metadata for an image, including label ID, name & directory location.
+    This is used as a data structured to store information about PIL-images and the unique ID. 
+    This is used within this software to assign new ID and track transformations applied to images.
+    """
 
     _applied_transformation: dict
 
