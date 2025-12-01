@@ -20,7 +20,7 @@ class ImageEntity(ABC):
         return self.meta_data.name
 
     @abstractmethod
-    def deep_copy(self):
+    def deep_copy(self) -> ImageEntity:
         pass
 
 
@@ -35,5 +35,8 @@ class PILImageEntity(ImageEntity):
     def return_image_name(self) -> str:
         return self.meta_data.name
 
-    def deep_copy(self):
-        return PILImageEntity(self.image, self.meta_data)
+    def deep_copy(self) -> PILImageEntity:
+        new_meta = ImageMetadata(
+            self.meta_data.label_id, self.meta_data.name, self.meta_data.location
+        )
+        return PILImageEntity(self.image, new_meta)

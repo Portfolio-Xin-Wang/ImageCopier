@@ -13,6 +13,7 @@ class RotatorTransformer(Transformer):
             image: PILImageEntity
             angle = self._generate_random_angle()
             image.image.rotate(angle)
+            image.meta_data.add_transformation("rot", angle)
         return image_store
     
     def _generate_random_angle(self):

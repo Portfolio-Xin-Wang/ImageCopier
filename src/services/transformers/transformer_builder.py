@@ -22,6 +22,10 @@ class TransformerBuilder(ABC):
     def add_copies(self, copies: int = 1) -> TransformerBuilder:
         pass
 
+    @abstractmethod
+    def build(self) -> ImageTransformer:
+        pass
+
     # Add further transformations
     # - Color changes
     # - Augmentation to image
@@ -35,6 +39,7 @@ class PILImageBuilder(TransformerBuilder):
         self.image_composite = ImageTransformer()
 
     def reset(self):
+        self.image_composite = ImageTransformer()
         self.image_composite.transformers = []
         return self
     
@@ -45,3 +50,6 @@ class PILImageBuilder(TransformerBuilder):
     def add_copies(self, copies = 1):
         self.image_composite.add_component(CopyTransformer(copy=copies))
         return self
+    
+    def build(self):
+        return self.image_composite

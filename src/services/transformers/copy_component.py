@@ -1,5 +1,5 @@
 from .transformer import Transformer
-
+from src.Domain import PILImageEntity
 class CopyTransformer(Transformer):
 
     copies: int
@@ -8,11 +8,17 @@ class CopyTransformer(Transformer):
         self.copies = copy
 
     def transform(self, image_store):
+        # TODO: Open for improvement like memory performance
         entities = []
-        for index in range(1, self.copies + 1):
-            for entity in image_store.images_collection:
-                copy = entity.deep_copy()
-                copy.meta_data.add_transformation("copy", index)
-                entities.append(copy)
+        for entity in image_store.images_collection:
+            entities += self._copy(entity)
         image_store.update(entities)
         return image_store
+    
+    def _copy(self, entity: PILImageEntity) -> PILImageEntity:
+        entities = []
+        for index in range(1, self.copies + 1):
+            copy = entity.deep_copy()
+            copy.meta_data.add_transformation("copy", index)
+            entities.append(copy)
+        return entities

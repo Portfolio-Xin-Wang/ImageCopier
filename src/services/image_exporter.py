@@ -6,8 +6,6 @@ from ..Domain import ImageEntity, PILImageEntity
 
 from .image_copier import ImageCopier
 
-from transformers import Transformer
-
 class ImageExporter(ABC):
 
     @abstractmethod
