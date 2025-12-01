@@ -33,7 +33,7 @@ class PILImageEntity(ImageEntity):
         self.image = image
 
     def return_image_name(self) -> str:
-        return self.meta_data.name
+        return self.meta_data.return_name()
 
     def deep_copy(self) -> PILImageEntity:
         new_meta = ImageMetadata(
