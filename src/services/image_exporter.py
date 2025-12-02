@@ -29,7 +29,7 @@ class LocalImageExporter(ImageExporter):
     def export(self) -> list[ImageEntity]:
         # Implementation for exporting images to an active service
 
-        images = self.image_copier.basic_perform(9)
+        images = self.image_copier.basic_perform()
         print(f"Files to be copied {len(images)}")
         for image in images:
             self._copy_image(image)
