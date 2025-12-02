@@ -1,0 +1,23 @@
+[project]
+name = "meiosis"
+version = "0.1.0"
+description = "Meiosis is a Python package for creating new Images, usable for generating extra image data for ML-workflows. Thank you for using the Meiosis package."
+authors = [
+    {name = "desalami@proton.me"}
+]
+license = {text = "MIT"}
+
+readme = "README.md"
+requires-python = ">= 3.12"
+dependencies = [
+    "pillow (>=12.0.0,<13.0.0)",
+    "pytest (>=9.0.1,<10.0.0)"
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[project.urls]
+Homepage = "https://github.com/Portfolio-Xin-Wang/ImageCopier"
+Issues = "https://github.com/Portfolio-Xin-Wang/ImageCopier/issues"

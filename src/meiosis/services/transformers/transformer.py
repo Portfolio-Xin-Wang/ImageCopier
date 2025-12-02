@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from src.Domain import ImageStore, PILImageEntity
+from src.meiosis.Domain import ImageStore
 
 
 class Transformer(ABC):

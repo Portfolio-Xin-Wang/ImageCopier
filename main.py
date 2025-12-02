@@ -1,4 +1,4 @@
-from src import Export
+from src.meiosis import Export
 
 entities = Export().read_from_directory()
 

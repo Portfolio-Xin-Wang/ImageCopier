@@ -1,4 +1,4 @@
-from src import ImageServiceFactory
+from src.meiosis import ImageServiceFactory
 
 class Export:
 

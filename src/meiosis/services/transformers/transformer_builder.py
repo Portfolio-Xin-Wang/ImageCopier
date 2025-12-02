@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from .transformer import Transformer
 from .image_composite import ImageTransformer
 
 from .copy_component import CopyTransformer

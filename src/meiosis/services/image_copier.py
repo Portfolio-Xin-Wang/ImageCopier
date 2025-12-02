@@ -1,7 +1,6 @@
-from PIL import Image
+from src.meiosis.Domain import PILImageEntity, ImageStore
 from .Image_repository import ImageRepository
-from ..Domain import PILImageEntity, ImageStore
-from src.services.transformers import ImageTransformer
+from .transformers import ImageTransformer
 
 class ImageCopier:
     """

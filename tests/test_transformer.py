@@ -1,7 +1,8 @@
 from PIL import Image
 
-from src.services.transformers import Transformer, PILImageBuilder, ImageTransformer, RotatorTransformer, CopyTransformer, TransformerBuilder
-from src.Domain import ImageStore, PILImageEntity, ImageMetadata
+from src.meiosis.services.transformers import Transformer, PILImageBuilder, ImageTransformer, RotatorTransformer, CopyTransformer
+from src.meiosis.Domain import ImageStore, PILImageEntity, ImageMetadata
+
 
 def test():
     assert (2 + 2) == (6 - 2)

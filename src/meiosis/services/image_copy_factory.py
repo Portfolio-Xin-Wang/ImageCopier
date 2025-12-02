@@ -1,4 +1,4 @@
-from src.services.transformers import PILImageBuilder
+from .transformers import PILImageBuilder
 
 from .image_copier import ImageCopier
 from .Image_repository import LocalFileStorage
