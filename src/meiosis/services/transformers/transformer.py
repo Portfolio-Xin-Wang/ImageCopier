@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from src.meiosis.Domain import ImageStore
+from ...Domain import ImageStore
 
 
 class Transformer(ABC):

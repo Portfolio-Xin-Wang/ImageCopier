@@ -1,4 +1,4 @@
-from src.meiosis.Domain import PILImageEntity, ImageStore
+from ..Domain import PILImageEntity, ImageStore
 from .Image_repository import ImageRepository
 from .transformers import ImageTransformer
 

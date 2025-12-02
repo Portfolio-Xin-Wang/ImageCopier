@@ -1,5 +1,5 @@
 from .transformer import Transformer
-from src.meiosis.Domain import PILImageEntity
+from ...Domain import PILImageEntity
 class CopyTransformer(Transformer):
 
     copies: int

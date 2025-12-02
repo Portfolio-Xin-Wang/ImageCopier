@@ -1,4 +1,4 @@
-# Meiosis 0.0.1
+# Meiosis 0.1.3
 Meiosis is a Python package for creating new Images, usable for generating extra image data for ML-workflows.
 Thank you for using the Meiosis package.
 
@@ -7,6 +7,23 @@ Thank you for using the Meiosis package.
 ## Use cases:
 - Transformation of Image data
 - Expanding current image datasets.
+
+## Installation
+
+Pip:
+```sh
+pip install meiosis
+```
+
+For a specific version:
+```sh
+pip install meiosis==0.1.2
+```
+
+Poetry:
+```sh
+poetry add meiosis
+```
 
 ## Quick start
 The current package provides one way to copy images locally, from a local data source. In this case a file directory.
