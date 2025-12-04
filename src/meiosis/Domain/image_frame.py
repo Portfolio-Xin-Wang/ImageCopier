@@ -17,6 +17,7 @@ class ImageFrame:
 
     def update(self, new_images: list[Entity]):
         self.images_collection = new_images
+        self.length = len(self.images_collection)
     
     def get_all(self) -> list[Entity]:
         return self.images_collection

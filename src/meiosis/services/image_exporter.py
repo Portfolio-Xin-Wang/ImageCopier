@@ -1,14 +1,14 @@
 import os
 from abc import ABC, abstractmethod
 
-from ..Domain import Entity, PILEntity
+from ..Domain import Entity, PILEntity, ImageFrame
 from .image_handler import ImageHandler
 
 
 class Exporter(ABC):
 
     @abstractmethod
-    def export(self) -> None:
+    def export(self) -> ImageFrame:
         pass
 
 class LocalFileExporter(Exporter):
@@ -26,7 +26,7 @@ class LocalFileExporter(Exporter):
         self.OUTPUT_DIRECTORY = output_direction
         self._create_directory_if_not_exists(self.OUTPUT_DIRECTORY)
 
-    def export(self) -> list[Entity]:
+    def export(self) -> ImageFrame:
         images = self.image_copier.handle()
         for image in images.images_collection:
             self._export_to_local(image)
