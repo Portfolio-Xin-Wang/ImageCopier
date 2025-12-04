@@ -1,5 +1,6 @@
 from .entity import Entity
 
+
 class ImageFrame:
     """
     An in memory data struture for storing images.

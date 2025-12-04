@@ -1,9 +1,9 @@
 import os
-
 from abc import ABC, abstractmethod
-from ..Domain import Entity, PILEntity
 
+from ..Domain import Entity, PILEntity
 from .image_handler import ImageHandler
+
 
 class Exporter(ABC):
 

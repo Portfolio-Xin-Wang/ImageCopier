@@ -1,5 +1,7 @@
-from .transformer import Transformer
 from ...Domain import PILEntity
+from .transformer import Transformer
+
+
 class CopyTransformer(Transformer):
 
     copies: int

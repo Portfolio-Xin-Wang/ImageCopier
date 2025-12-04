@@ -1,7 +1,10 @@
 from PIL import Image
 
-from src.meiosis.services.transformers import Transformer, PILImageBuilder, ImageTransformer, RotatorTransformer, CopyTransformer
-from src.meiosis.Domain import ImageFrame, PILEntity, EntityInfo
+from src.meiosis.Domain import EntityInfo, ImageFrame, PILEntity
+from src.meiosis.services.transformers import (CopyTransformer,
+                                               ImageTransformer,
+                                               PILImageBuilder,
+                                               RotatorTransformer, Transformer)
 
 
 def test():

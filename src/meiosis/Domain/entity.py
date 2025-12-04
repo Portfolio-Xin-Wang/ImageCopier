@@ -1,6 +1,9 @@
 from abc import ABC, abstractmethod
+
 from PIL import Image
+
 from .entity_info import EntityInfo
+
 
 class Entity(ABC):
     """

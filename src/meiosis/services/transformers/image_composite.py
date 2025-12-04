@@ -1,5 +1,6 @@
-from .transformer import Transformer
 from ...Domain import ImageFrame
+from .transformer import Transformer
+
 
 class ImageTransformer(Transformer):
 

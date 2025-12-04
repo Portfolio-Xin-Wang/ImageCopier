@@ -1,6 +1,8 @@
-from .transformer import Transformer
-from ...Domain import PILEntity
 import random
+
+from ...Domain import PILEntity
+from .transformer import Transformer
+
 
 class RotatorTransformer(Transformer):
     base_value: int 

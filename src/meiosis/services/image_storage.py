@@ -1,9 +1,10 @@
-from abc import ABC, abstractmethod
-from PIL import Image
-from ..Domain import PILEntity, Entity, map_name_to_id, EntityInfo, ImageFrame
 import os
-
+from abc import ABC, abstractmethod
 from pathlib import Path
+
+from PIL import Image
+
+from ..Domain import Entity, EntityInfo, ImageFrame, PILEntity, map_name_to_id
 
 
 class IStorage(ABC):
