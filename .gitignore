@@ -3,3 +3,5 @@ test_images
 .history
 .vscode
 .dist
+*.ipynb
+.env
