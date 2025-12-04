@@ -1,6 +1,6 @@
 from .image_entity import ImageEntity
 
-class ImageStore:
+class ImageFrame:
     """
     An in memory data struture for storing images.
     """

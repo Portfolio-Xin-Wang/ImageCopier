@@ -1,4 +1,4 @@
-from ..Domain import PILImageEntity, ImageStore
+from ..Domain import PILImageEntity, ImageFrame
 from .Image_repository import ImageRepository
 from .transformers import ImageTransformer
 
@@ -25,5 +25,5 @@ class ImageCopier:
         # Currently extracting a concrete type. Later this responsibility will be moved to a transformer class
         images: list[PILImageEntity] = self.image_repository.get()
         # Export function: format metadata
-        result = self.transformers.transform(ImageStore(images=images))
+        result = self.transformers.transform(ImageFrame(images=images))
         return result.images_collection 
