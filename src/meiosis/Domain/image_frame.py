@@ -1,3 +1,5 @@
+from numpy import ndarray
+
 from .entity import Entity
 
 
@@ -24,3 +26,9 @@ class ImageFrame:
     
     def clear(self) -> None:
         self.images_collection = []
+
+    def image_to_numpy(self) -> ndarray:
+        return [entity.image_to_numpy() for entity in self.get_all()]
+    
+    def metadata_to_numpy(self) -> ndarray:
+        return [entity.metadata_to_numpy() for entity in self.get_all()]

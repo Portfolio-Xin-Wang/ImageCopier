@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+from numpy import array, ndarray
 from PIL import Image
 
 from .entity_info import EntityInfo
@@ -26,6 +27,13 @@ class Entity(ABC):
     def deep_copy(self) -> Entity:
         pass
 
+    @abstractmethod
+    def image_to_numpy(self) -> ndarray:
+        pass
+
+    def metadata_to_numpy(self) -> ndarray:
+        return array(self.meta_data.__dict__())
+
 
 class PILEntity(Entity):
 
@@ -43,3 +51,6 @@ class PILEntity(Entity):
             self.meta_data.label_id, self.meta_data.name, self.meta_data.location
         )
         return PILEntity(self.image, new_meta)
+    
+    def image_to_numpy(self):
+        return array(self.image)
