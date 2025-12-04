@@ -4,8 +4,11 @@ from .transformer import Transformer
 
 class ImageTransformer(Transformer):
 
-    transformers: list[Transformer]
+    transformers: list[Transformer] = []
     starting_transformer: Transformer
+
+    def __init__(self):
+        super().__init__()
 
     def transform(self, image_store):
         updated_image_store: ImageFrame = image_store

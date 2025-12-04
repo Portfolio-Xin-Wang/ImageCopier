@@ -24,7 +24,7 @@ class LocalFileExporter(Exporter):
         self.image_copier = copier
         self.transformed_name = "{label_id}&{rotation};{file}.{extension}"
         self.OUTPUT_DIRECTORY = output_direction
-        self._create_directory_if_not_exists(output_direction)
+        self._create_directory_if_not_exists(self.OUTPUT_DIRECTORY)
 
     def export(self) -> list[Entity]:
         images = self.image_copier.handle()
@@ -37,7 +37,7 @@ class LocalFileExporter(Exporter):
 
     def _create_directory_if_not_exists(self, directory: str) -> str:
         if not os.path.exists(directory):
-            os.makedirs(f"{self.OUTPUT_DIRECTORY}{directory}")
+            os.makedirs(f"{directory}")
         return directory
     
     # Export function

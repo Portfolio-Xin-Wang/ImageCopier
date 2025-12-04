@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 from .copy_component import CopyTransformer
-from .image_composite import ImageTransformer
+from .image_transformer import ImageTransformer
 from .rotator_component import RotatorTransformer
 
 

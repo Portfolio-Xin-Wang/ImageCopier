@@ -11,7 +11,7 @@ class ImageHandler:
     image_repository: IStorage
     transformers: ImageTransformer
 
-    def __init__(self, image_repo: IStorage, transformers: ImageTransformer) -> None:
+    def __init__(self, image_repo: IStorage, transformers: ImageTransformer = ImageTransformer()) -> None:
         self.transformers = transformers
         self.image_repository = image_repo
 
