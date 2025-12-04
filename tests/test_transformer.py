@@ -1,7 +1,7 @@
 from PIL import Image
 
 from src.meiosis.services.transformers import Transformer, PILImageBuilder, ImageTransformer, RotatorTransformer, CopyTransformer
-from src.meiosis.Domain import ImageFrame, PILImageEntity, ImageMetadata
+from src.meiosis.Domain import ImageFrame, PILEntity, EntityInfo
 
 
 def test():
@@ -29,7 +29,7 @@ def test_copy_transformer_creates_4_copies_with_unique_names():
     # Arrange
     test_image = Image.open("tests/test_images/test_copy_image1.jpg")
     composite: CopyTransformer = CopyTransformer(4)
-    image_entity = PILImageEntity(test_image, ImageMetadata(label_id=0, name="test_copy_image1.jpg", location="test_images/"))
+    image_entity = PILEntity(test_image, EntityInfo(label_id=0, name="test_copy_image1.jpg", location="test_images/"))
     existing_image_store = ImageFrame(images=[image_entity])
     # Act
     end_result: ImageFrame = composite.transform(existing_image_store)
@@ -45,7 +45,7 @@ def test_rotator_transformer_rotates_image():
     # Arrange
     test_image = Image.open("tests/test_images/test_rotator_image1.jpg")
     composite: ImageTransformer = PILImageBuilder().reset().add_copies(2).add_rotation(2).build()
-    image_entity = PILImageEntity(test_image, ImageMetadata(label_id=0, name="test_rotation_image1.jpg", location="test_images/"))
+    image_entity = PILEntity(test_image, EntityInfo(label_id=0, name="test_rotation_image1.jpg", location="test_images/"))
     existing_image_store = ImageFrame(images=[image_entity])
     # Act
     end_result: ImageFrame = composite.transform(existing_image_store)
@@ -59,7 +59,7 @@ def test_return_name_post_transformations_format():
     # Arrange
     test_image = Image.open("tests/test_images/test_rotator_image1.jpg")
     composite: ImageTransformer = PILImageBuilder().reset().add_copies(2).add_rotation(2).build()
-    image_entity = PILImageEntity(test_image, ImageMetadata(label_id=0, name="test_rotation_image1.jpg", location="test_images/"))
+    image_entity = PILEntity(test_image, EntityInfo(label_id=0, name="test_rotation_image1.jpg", location="test_images/"))
     existing_image_store = ImageFrame(images=[image_entity])
     # Act
     end_result: ImageFrame = composite.transform(existing_image_store)

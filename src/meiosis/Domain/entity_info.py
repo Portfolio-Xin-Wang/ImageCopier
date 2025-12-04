@@ -1,4 +1,4 @@
-class ImageMetadata:
+class EntityInfo:
     """
     Class to hold metadata for an image, including label ID, name & directory location.
     This is used as a data structured to store information about PIL-images and the unique ID. 
@@ -22,3 +22,10 @@ class ImageMetadata:
             transformation_string += f"{value};{key}&"
         
         return f"{self.label_id}&{transformation_string}{self.name}"
+    
+    def __dict__(self):
+        return {
+            "label_id": self.label_id,
+            "name": self.name,
+            "location": self.location
+        }

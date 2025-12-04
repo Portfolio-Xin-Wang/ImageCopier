@@ -1,15 +1,15 @@
 from abc import ABC, abstractmethod
 from PIL import Image
-from .image_metadata import ImageMetadata
+from .entity_info import EntityInfo
 
-class ImageEntity(ABC):
+class Entity(ABC):
     """
     Abstract base class for ImageEntity
     It may be used to encapsulate images in different ways.
     """
-    meta_data: ImageMetadata
+    meta_data: EntityInfo
 
-    def __init__(self, meta_data: ImageMetadata):
+    def __init__(self, meta_data: EntityInfo):
         self.meta_data = meta_data
 
     @abstractmethod
@@ -20,23 +20,23 @@ class ImageEntity(ABC):
         return self.meta_data.name
 
     @abstractmethod
-    def deep_copy(self) -> ImageEntity:
+    def deep_copy(self) -> Entity:
         pass
 
 
-class PILImageEntity(ImageEntity):
+class PILEntity(Entity):
 
     image: Image
 
-    def __init__(self, image: Image, meta_data: ImageMetadata):
+    def __init__(self, image: Image, meta_data: EntityInfo):
         super().__init__(meta_data)
         self.image = image
 
     def return_image_name(self) -> str:
         return self.meta_data.return_name()
 
-    def deep_copy(self) -> PILImageEntity:
-        new_meta = ImageMetadata(
+    def deep_copy(self) -> PILEntity:
+        new_meta = EntityInfo(
             self.meta_data.label_id, self.meta_data.name, self.meta_data.location
         )
-        return PILImageEntity(self.image, new_meta)
+        return PILEntity(self.image, new_meta)

@@ -1,4 +1,4 @@
-from ..services.image_copy_factory import ImageServiceFactory
+from ..services.meiosis_factory import ImageServiceFactory
 
 class Export:
 

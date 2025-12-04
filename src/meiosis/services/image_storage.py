@@ -1,12 +1,12 @@
 from abc import ABC, abstractmethod
 from PIL import Image
-from ..Domain import PILImageEntity, ImageEntity, map_name_to_id, ImageMetadata
+from ..Domain import PILEntity, Entity, map_name_to_id, EntityInfo, ImageFrame
 import os
 
 from pathlib import Path
 
 
-class ImageRepository(ABC):
+class IStorage(ABC):
     """
     Abstract base class for image repositories.
     - Local file storage
@@ -18,7 +18,7 @@ class ImageRepository(ABC):
         pass
 
 
-class LocalFileStorage(ImageRepository):
+class LocalFileStorage(IStorage):
     """
     An image repository that retrieves images from local file system.
     This returns the PILImageEntity type
@@ -36,7 +36,7 @@ class LocalFileStorage(ImageRepository):
         self.image_directory = image_directory
         os.listdir(self.image_directory)
 
-    def get(self) -> list[ImageEntity]:
+    def get(self) -> ImageFrame:
         """
         Retrieves images from local file system.
         The assumption is that all images are located at the same directory.
@@ -44,9 +44,10 @@ class LocalFileStorage(ImageRepository):
         """
         file_names = os.listdir(self.image_directory)
         image_names = self._filter_non_images(file_names)
-        return self._format_images(image_names, self.image_directory)
+        transformed_images = self._format_images(image_names, self.image_directory)
+        return ImageFrame(transformed_images)
 
-    def _format_images(self, images: list[str], source: str) -> list[ImageEntity]:
+    def _format_images(self, names: list[str], source: str) -> list[Entity]:
         """
         Locates images in local file system.
         Formats it in a image entity
@@ -55,11 +56,11 @@ class LocalFileStorage(ImageRepository):
         """
         _pil_image = []
         location = "{data_dir}/{name}"
-        for image_location in images:
-            image = Image.open(location.format(data_dir=source, name=image_location))
-            label_id = map_name_to_id(image_location)
-            meta_data = ImageMetadata(label_id, image_location, source)
-            entity = PILImageEntity(image, meta_data)
+        for img_name in names:
+            image = Image.open(location.format(data_dir=source, name=img_name))
+            label_id = map_name_to_id(img_name)
+            meta_data = EntityInfo(label_id, img_name, source)
+            entity = PILEntity(image, meta_data)
             _pil_image.append(entity)
         return _pil_image
 

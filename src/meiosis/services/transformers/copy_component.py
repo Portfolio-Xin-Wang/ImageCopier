@@ -1,5 +1,5 @@
 from .transformer import Transformer
-from ...Domain import PILImageEntity
+from ...Domain import PILEntity
 class CopyTransformer(Transformer):
 
     copies: int
@@ -15,7 +15,7 @@ class CopyTransformer(Transformer):
         image_store.update(entities)
         return image_store
     
-    def _copy(self, entity: PILImageEntity) -> PILImageEntity:
+    def _copy(self, entity: PILEntity) -> PILEntity:
         entities = []
         for index in range(1, self.copies + 1):
             copy = entity.deep_copy()

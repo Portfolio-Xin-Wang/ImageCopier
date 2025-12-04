@@ -1,5 +1,5 @@
 from .transformer import Transformer
-from ...Domain import PILImageEntity
+from ...Domain import PILEntity
 import random
 
 class RotatorTransformer(Transformer):
@@ -10,7 +10,7 @@ class RotatorTransformer(Transformer):
 
     def transform(self, image_store):
         for image in image_store.images_collection:
-            image: PILImageEntity
+            image: PILEntity
             angle = self._generate_random_angle()
             image.image.rotate(angle)
             image.meta_data.add_transformation("rot", angle)
