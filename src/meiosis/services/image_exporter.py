@@ -43,4 +43,5 @@ class LocalFileExporter(Exporter):
     # Export function
     def _export_to_local(self, entity: PILEntity) -> None:
         output_name = self._format_output_file(entity)
+        print(output_name)
         entity.image.save(output_name)
