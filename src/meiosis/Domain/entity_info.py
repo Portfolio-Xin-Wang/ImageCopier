@@ -7,7 +7,7 @@ class EntityInfo:
 
     _applied_transformation: dict
 
-    def __init__(self, label_id: int, name: str, location: str):
+    def __init__(self, name: str, location: str, label_id: int = None):
         self.label_id = label_id
         self.name = name
         self.location = location

@@ -5,6 +5,7 @@ from pathlib import Path
 from PIL import Image
 
 from ..Domain import Entity, EntityInfo, ImageFrame, PILEntity, map_name_to_id
+from .mapping import StandardMapper, BreadMapper, ImageMapper
 
 
 class IStorage(ABC):
@@ -13,10 +14,15 @@ class IStorage(ABC):
     - Local file storage
     - Cloud based solution
     """
+    mapper: ImageMapper
 
     @abstractmethod
     def get(self) -> list:
         pass
+
+    @abstractmethod
+    def set_mapper(self, mapper: ImageMapper):
+        self.mapper = mapper
 
 
 class LocalFileStorage(IStorage):
@@ -27,7 +33,7 @@ class LocalFileStorage(IStorage):
     image_directory: str
     IMAGE_FORMATS: dict = {".png": True, ".jpg": True, ".jpeg": True, ".svg": True}
 
-    def __init__(self, image_directory: str):
+    def __init__(self, image_directory: str, mapper=StandardMapper()):
         """
         Should return an error if no directory is found
         :param image_directory:
@@ -35,6 +41,7 @@ class LocalFileStorage(IStorage):
         Throws error if directory does not exist
         """
         self.image_directory = image_directory
+        self.mapper = mapper
         os.listdir(self.image_directory)
 
     def get(self) -> ImageFrame:
@@ -47,6 +54,9 @@ class LocalFileStorage(IStorage):
         image_names = self._filter_non_images(file_names)
         transformed_images = self._format_images(image_names, self.image_directory)
         return ImageFrame(transformed_images)
+    
+    def set_mapper(self, mapper):
+        return super().set_mapper(mapper)
 
     def _format_images(self, names: list[str], source: str) -> list[Entity]:
         """

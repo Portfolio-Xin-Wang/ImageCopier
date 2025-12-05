@@ -4,11 +4,11 @@ import shutil
 import pytest
 
 from src.meiosis import (Export, ImageHandler, LocalFileExporter,
-                         LocalFileStorage)
+                         LocalFileStorage, StandardMapper)
 
-IMPORT_LOCAL_FOLDER = "tests/test_images/retrieval"
-EXPORT_TEST_FOLDER = "tests/test_images/new_exporter"
-EXPORT_EXISTING_FOLDER = "tests/test_images/exporter"
+IMPORT_LOCAL_FOLDER = "tests/images/retrieval"
+EXPORT_TEST_FOLDER = "tests/images/new_exporter"
+EXPORT_EXISTING_FOLDER = "tests/images/exporter"
 
 @pytest.fixture
 def clear():
@@ -32,7 +32,7 @@ def test_if_localfile_exporter_exports_images_to_non_existent_directory(clear):
     file_names = os.listdir(EXPORT_TEST_FOLDER)
     assert len(file_names) == 4
     assert results.length == 4
-    
+
 
  
 

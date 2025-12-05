@@ -1,6 +1,8 @@
-from numpy import ndarray
+from numpy import ndarray, stack, reshape
 
 from .entity import Entity
+
+from PIL import Image
 
 
 class ImageFrame:
@@ -28,7 +30,11 @@ class ImageFrame:
         self.images_collection = []
 
     def image_to_numpy(self) -> ndarray:
-        return [entity.image_to_numpy() for entity in self.get_all()]
+        n = [entity.image_to_numpy() for entity in self.get_all()]
+        # Temporarely solution for inconsistent images
+        standard = n[0].shape
+        r = [input.reshape(standard) for input in n]
+        return stack(r)
     
     def metadata_to_numpy(self) -> ndarray:
-        return [entity.metadata_to_numpy() for entity in self.get_all()]
+        return stack([entity.metadata_to_numpy() for entity in self.get_all()])

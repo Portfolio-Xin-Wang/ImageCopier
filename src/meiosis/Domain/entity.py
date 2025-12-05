@@ -32,7 +32,7 @@ class Entity(ABC):
         pass
 
     def metadata_to_numpy(self) -> ndarray:
-        return array(self.meta_data.__dict__())
+        return array(self.meta_data.label_id)
 
 
 class PILEntity(Entity):
