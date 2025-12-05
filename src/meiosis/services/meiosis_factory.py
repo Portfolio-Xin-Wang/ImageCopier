@@ -1,14 +1,14 @@
 from .image_exporter import LocalFileExporter
 from .image_handler import ImageHandler
 from .image_storage import LocalFileStorage
-from .mapping import ImageMapper
+from .mapping import ImageMapper, StandardMapper
 from .transformers import PILImageBuilder
 
 
 class ImageServiceFactory:
     transformer_builder: PILImageBuilder
 
-    def __init__(self, custom_mapper:ImageMapper = None):
+    def __init__(self, custom_mapper:ImageMapper = StandardMapper()):
         self.transformer_builder = PILImageBuilder()
         self.custom_mapper = custom_mapper
 
