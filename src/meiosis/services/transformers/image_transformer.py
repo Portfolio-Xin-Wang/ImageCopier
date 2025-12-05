@@ -8,6 +8,7 @@ class ImageTransformer(Transformer):
     starting_transformer: Transformer
 
     def __init__(self):
+        self.transformers = []
         super().__init__()
 
     def transform(self, image_store):

@@ -48,7 +48,7 @@ class PILEntity(Entity):
 
     def deep_copy(self) -> PILEntity:
         new_meta = EntityInfo(
-            self.meta_data.label_id, self.meta_data.name, self.meta_data.location
+            label_id=self.meta_data.label_id, name=self.meta_data.name, location=self.meta_data.location
         )
         return PILEntity(self.image, new_meta)
     
