@@ -69,9 +69,7 @@ class LocalFileStorage(IStorage):
         location = "{data_dir}/{name}"
         for img_name in names:
             image = Image.open(location.format(data_dir=source, name=img_name))
-            label_id = map_name_to_id(img_name)
-            meta_data = EntityInfo(label_id, img_name, source)
-            entity = PILEntity(image, meta_data)
+            entity = self.mapper.map(image, img_name=img_name, source=source)
             _pil_image.append(entity)
         return _pil_image
 
