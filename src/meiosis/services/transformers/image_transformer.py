@@ -4,7 +4,7 @@ from .transformer import Transformer
 
 class ImageTransformer(Transformer):
 
-    transformers: list[Transformer] = []
+    transformers: list[Transformer]
     starting_transformer: Transformer
 
     def __init__(self):

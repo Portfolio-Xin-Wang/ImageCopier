@@ -4,7 +4,7 @@ import shutil
 import pytest
 
 from src.meiosis import (Export, ImageHandler, LocalFileExporter,
-                         LocalFileStorage, StandardMapper)
+                         LocalFileStorage, ImageTransformer)
 
 IMPORT_LOCAL_FOLDER = "tests/images/retrieval"
 EXPORT_TEST_FOLDER = "tests/images/new_exporter"
@@ -16,7 +16,8 @@ def clear():
 
 def test_if_localfile_exporter_exports_images_correctly():
     repository = LocalFileStorage(IMPORT_LOCAL_FOLDER)
-    handler = ImageHandler(image_repo=repository)
+    trans = ImageTransformer()
+    handler = ImageHandler(image_repo=repository, transformers=trans)
     exporter = LocalFileExporter(handler, EXPORT_EXISTING_FOLDER)
     results = exporter.export()
 
