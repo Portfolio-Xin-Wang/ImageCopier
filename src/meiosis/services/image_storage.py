@@ -5,7 +5,7 @@ from pathlib import Path
 from PIL import Image
 
 from ..Domain import Entity, EntityInfo, ImageFrame, PILEntity, map_name_to_id
-from .mapping import StandardMapper, BreadMapper, ImageMapper
+from .mapping import Mapper, ImageMapper
 
 
 class IStorage(ABC):
@@ -33,7 +33,7 @@ class LocalFileStorage(IStorage):
     image_directory: str
     IMAGE_FORMATS: dict = {".png": True, ".jpg": True, ".jpeg": True, ".svg": True}
 
-    def __init__(self, image_directory: str, mapper=StandardMapper()):
+    def __init__(self, image_directory: str, mapper=Mapper()):
         """
         Should return an error if no directory is found
         :param image_directory:
@@ -70,7 +70,9 @@ class LocalFileStorage(IStorage):
         for img_name in names:
             image = Image.open(location.format(data_dir=source, name=img_name))
             label_id = map_name_to_id(img_name)
+            
             meta_data = EntityInfo(label_id=label_id, name=img_name, location=source)
+            e = self.mapper.map(img=image, img_name=img_name, source=source)
             entity = PILEntity(image, meta_data)
             _pil_image.append(entity)
         return _pil_image

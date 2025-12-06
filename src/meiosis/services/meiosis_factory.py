@@ -1,7 +1,7 @@
 from .image_exporter import LocalFileExporter
 from .image_handler import ImageHandler
 from .image_storage import LocalFileStorage
-from .mapping import ImageMapper, StandardMapper
+from .mapping import ImageMapper, Mapper
 from .transformers import PILImageBuilder
 
 

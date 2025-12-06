@@ -8,9 +8,13 @@ class ImageMapper(ABC):
     def map(self, img: Image, img_name: str, source: str) -> Entity:
         pass
 
-class StandardMapper(ImageMapper):
+class Mapper(ImageMapper):
     def map(self, img, img_name, source):
+        # Temp solution
+        label_id = map_name_to_id(img_name)
         info = EntityInfo(name=img_name, location=source)
+        # Temp solution.
+        info.add_transformation("label", label_id)
         return PILEntity(img, info)
 
 class BreadMapper(ImageMapper):

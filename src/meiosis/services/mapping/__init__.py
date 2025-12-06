@@ -1,2 +1,2 @@
-from .standard_map import StandardMapper, BreadMapper, ImageMapper
-__init__ = [ImageMapper, StandardMapper, BreadMapper]
+from .standard_map import Mapper, BreadMapper, ImageMapper
+__init__ = [ImageMapper, Mapper, BreadMapper]
