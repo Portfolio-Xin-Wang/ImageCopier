@@ -5,3 +5,4 @@ test_images
 .dist
 *.ipynb
 .env
+.coverage
