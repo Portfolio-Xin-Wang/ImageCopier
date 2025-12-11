@@ -21,11 +21,13 @@ class EntityInfo:
         for key, value in self._applied_transformation.items():
             transformation_string += f"{value};{key}&"
         
-        return f"{self.label_id}&{transformation_string}{self.name}"
+        return f"{transformation_string}{self.name}"
     
     def __dict__(self):
-        return {
-            "label_id": self.label_id,
+        standard_dict = {
             "name": self.name,
             "location": self.location
         }
+        for key, value in self._applied_transformation.items():
+            standard_dict[key] = value
+        return standard_dict
