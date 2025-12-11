@@ -2,8 +2,6 @@ from numpy import ndarray, stack, reshape
 
 from .entity import Entity
 
-from PIL import Image
-
 
 class ImageFrame:
     """
