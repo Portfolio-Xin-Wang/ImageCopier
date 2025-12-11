@@ -70,10 +70,10 @@ def test_return_name_post_transformations_format():
     # Assert
     splitted1 = end_result.images_collection[0].return_image_name().split("&")
     splitted2 = end_result.images_collection[1].return_image_name().split("&")
-    
-    assert "1" == splitted1[1].split(";")[0]
-    assert "2" == splitted2[1].split(";")[0]
-    assert "copy" == splitted1[1].split(";")[1]
-    assert "copy" == splitted2[1].split(";")[1]
-    assert "rot" == splitted1[2].split(";")[1]
-    assert "rot" == splitted2[2].split(";")[1]
+
+    assert '1' == splitted1[0].split(";")[0]
+    assert '2' == splitted2[0].split(";")[0]
+    assert "copy" == splitted1[0].split(";")[1]
+    assert "copy" == splitted2[0].split(";")[1]
+    assert "rot" == splitted1[1].split(";")[1]
+    assert "rot" == splitted2[1].split(";")[1]
