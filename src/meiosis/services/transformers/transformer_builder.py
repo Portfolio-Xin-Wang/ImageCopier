@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 
 from .copy_component import CopyTransformer
+from .mapping_component import MapTransformer
 from .image_transformer import ImageTransformer
 from .rotator_component import RotatorTransformer
 
@@ -12,6 +13,10 @@ class TransformerBuilder(ABC):
     
     @abstractmethod
     def reset(self) -> TransformerBuilder:
+        pass
+
+    @abstractmethod
+    def add_mapping(self, mapper: MapTransformer=None) -> TransformerBuilder:
         pass
 
     @abstractmethod
@@ -41,6 +46,14 @@ class PILImageBuilder(TransformerBuilder):
     def reset(self):
         self.image_composite = ImageTransformer()
         self.image_composite.transformers = []
+        return self
+    
+    def add_mapping(self, mapper = None):
+        if mapper is not None:
+            self.image_composite.add_component(mapper)
+        else:
+            default = MapTransformer()
+            self.image_composite.add_component(default)
         return self
     
     def add_rotation(self, base_value = 2):
