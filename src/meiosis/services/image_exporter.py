@@ -33,7 +33,10 @@ class LocalFileExporter(Exporter):
         return images
 
     def _format_output_file(self, entity: Entity) -> str:
-        return f"./{self.OUTPUT_DIRECTORY}/{entity.meta_data.return_name()}"
+        meta = entity.meta_data.target_director
+        target_format = f"./{self.OUTPUT_DIRECTORY}/{meta}"
+        target = self._create_directory_if_not_exists(target_format)
+        return f"{target}/{entity.meta_data.return_name()}"
 
     def _create_directory_if_not_exists(self, directory: str) -> str:
         if not os.path.exists(directory):

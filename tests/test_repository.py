@@ -58,7 +58,6 @@ def test_import_image_in_directory_root():
     assert meta_data.target_director == expected_result
 
 def test_import_image_in_directory_returns_four_entities():
-    expected_result = 4
     expected_directories = ["cat3", "cat1", "cat2", ""]
     directory = "tests/images/import_new"
     new_mapper = Mapper()
