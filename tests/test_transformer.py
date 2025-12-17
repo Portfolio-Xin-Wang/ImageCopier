@@ -32,7 +32,7 @@ def test_copy_transformer_creates_4_copies_with_unique_names():
     # Arrange
     test_image = Image.open("tests/images/transform/test_copy_image1.jpg")
     composite: CopyTransformer = CopyTransformer(4)
-    image_entity = PILEntity(test_image, EntityInfo(label_id=0, name="test_copy_image1.jpg", location="test_images/"))
+    image_entity = PILEntity(test_image, EntityInfo(name="test_copy_image1.jpg", location="test_images/", target_director=""))
     existing_image_store = ImageFrame(images=[image_entity])
     # Act
     end_result: ImageFrame = composite.transform(existing_image_store)
@@ -48,7 +48,7 @@ def test_rotator_transformer_rotates_image():
     # Arrange
     test_image = Image.open("tests/images/transform/test_rotator_image1.jpg")
     composite: ImageTransformer = PILImageBuilder().reset().add_copies(2).add_rotation(2).build()
-    image_entity = PILEntity(test_image, EntityInfo(label_id=0, name="test_rotation_image1.jpg", location="test_images/"))
+    image_entity = PILEntity(test_image, EntityInfo(name="test_rotation_image1.jpg", location="test_images/", target_director=""))
     existing_image_store = ImageFrame(images=[image_entity])
     # Act
     end_result: ImageFrame = composite.transform(existing_image_store)
@@ -62,7 +62,7 @@ def test_return_name_post_transformations_format():
     # Arrange
     test_image = Image.open("tests/images/transform/test_rotator_image1.jpg")
     composite: ImageTransformer = PILImageBuilder().reset().add_copies(2).add_rotation(2).build()
-    image_entity = PILEntity(test_image, EntityInfo(label_id=0, name="test_rotation_image1.jpg", location="test_images/"))
+    image_entity = PILEntity(test_image, EntityInfo(name="test_rotation_image1.jpg", location="test_images/", target_director=""))
     existing_image_store = ImageFrame(images=[image_entity])
     # Act
     end_result: ImageFrame = composite.transform(existing_image_store)

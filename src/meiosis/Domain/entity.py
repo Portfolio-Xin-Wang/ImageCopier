@@ -32,7 +32,7 @@ class Entity(ABC):
         pass
 
     def metadata_to_numpy(self) -> ndarray:
-        return array(self.meta_data.label_id)
+        return array(self.meta_data.__dict__())
 
 
 class PILEntity(Entity):
@@ -48,7 +48,7 @@ class PILEntity(Entity):
 
     def deep_copy(self) -> PILEntity:
         new_meta = EntityInfo(
-            label_id=self.meta_data.label_id, name=self.meta_data.name, location=self.meta_data.location
+           name=self.meta_data.name, location=self.meta_data.location, target_director=self.meta_data.target_director
         )
         return PILEntity(self.image, new_meta)
     

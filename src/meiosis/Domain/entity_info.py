@@ -7,8 +7,8 @@ class EntityInfo:
 
     _applied_transformation: dict
 
-    def __init__(self, name: str, location: str, label_id: int = None):
-        self.label_id = label_id
+    def __init__(self, name: str, location: str, target_director: str):
+        self.target_director = target_director
         self.name = name
         self.location = location
         self._applied_transformation = {}
