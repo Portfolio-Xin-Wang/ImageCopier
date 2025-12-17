@@ -76,9 +76,6 @@ class LocalFileStorage(IStorage):
                                             target_dir=file_entity.parent.name, 
                                             root=root)
                 entities.append(format_image)
-            else:
-                print("Not an image")
-                continue
         return entities
 
     def set_mapper(self, mapper):
