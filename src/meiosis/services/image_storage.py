@@ -50,11 +50,33 @@ class LocalFileStorage(IStorage):
         The assumption is that all images are located at the same directory.
         :return: List of ImageEntities. In the type of PILImageEntity
         """
-        file_names = os.listdir(self.image_directory)
-        image_names = self._filter_non_images(file_names)
-        transformed_images = self._format_images(image_names, self.image_directory)
+        # Start loop
+        transformed_images = self._enter_file("", self.image_directory)
         return ImageFrame(transformed_images)
     
+    def _enter_file(self, root: str, parent_directory: str) -> list:
+        entities = []
+        file_names = os.listdir(parent_directory)
+        for name in file_names:
+            exact_location = f"{parent_directory}/{name}"
+            file_entity = Path(exact_location)
+            # If name is a directory, enter and start loop.
+            extra_root = f"{root}/{name}"
+            if(file_entity.is_dir()):
+                # Append results into array
+                entities += self._enter_file(extra_root,exact_location)
+            # If name is an image, retrieve image and map data to entity, with the location, and target directory.
+            elif(self.IMAGE_FORMATS.get(file_entity.suffix)):
+                target = file_entity.parent
+                print(target == parent_directory)
+                image_ent = Image.open(exact_location)
+                format_image = self.mapper.map(img=image_ent, img_name=name, source=extra_root)
+                entities.append(format_image)
+            else:
+                print("Not an image")
+                continue
+        return entities
+
     def set_mapper(self, mapper):
         return super().set_mapper(mapper)
 

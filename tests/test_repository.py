@@ -13,9 +13,18 @@ def test_if_error_is_raised_on_invalid_datasource():
 
 # Test if import of image1 in cat1 one, assigns target directory cat1
 def test_import_image_in_directory_cat1():
+    # Arrange
     expected_result = "cat1"
-    expected_location = "/cat1"
-    assert False
+    expected_location = "/cat1/kof1.jpg"
+    directory = "tests/images/import_new"
+    new_mapper = Mapper()
+    repo = LocalFileStorage(directory, new_mapper)
+    # Act
+    images = repo.get()
+    # Assert
+    meta_data = images.images_collection[1].meta_data
+    assert meta_data.name == "kof1.jpg"
+    assert meta_data.location == expected_location
 
 # Test if import of image2 in cat1/cat3 has the exact location, but assigns target directory cat3
 def test_import_image_in_directory_cat3():
