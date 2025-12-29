@@ -12,11 +12,15 @@ class ImageTransformer(Transformer):
         super().__init__()
 
     def transform(self, image_store):
-        updated_image_store: ImageFrame = image_store
-        for transformer in self.transformers:
-            updated_image_store = transformer.transform(image_store=updated_image_store)
-        return updated_image_store
-    
+        try:
+            updated_image_store: ImageFrame = image_store
+            for transformer in self.transformers:
+                updated_image_store = transformer.transform(image_store=updated_image_store)
+            return updated_image_store
+        except Exception as e:
+            print(f"Error during transformation: {e}")
+            raise
+        
     def add_component(self, transformer: Transformer):
         self.transformers.append(transformer)
 

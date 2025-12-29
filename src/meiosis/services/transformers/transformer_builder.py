@@ -4,7 +4,7 @@ from .copy_component import CopyTransformer
 from .mapping_component import MapTransformer
 from .image_transformer import ImageTransformer
 from .rotator_component import RotatorTransformer
-
+from .hsv_transformer import HSVTransformer
 
 class TransformerBuilder(ABC):
     # Possible implementations:
@@ -13,6 +13,10 @@ class TransformerBuilder(ABC):
     
     @abstractmethod
     def reset(self) -> TransformerBuilder:
+        pass
+
+    @abstractmethod
+    def hsv_transform(self) -> TransformerBuilder:
         pass
 
     @abstractmethod
@@ -54,6 +58,10 @@ class PILImageBuilder(TransformerBuilder):
         else:
             default = MapTransformer()
             self.image_composite.add_component(default)
+        return self
+    
+    def hsv_transform(self):
+        self.image_composite.add_component(HSVTransformer())
         return self
     
     def add_rotation(self, base_value = 2):
