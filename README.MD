@@ -6,7 +6,8 @@ Thank you for using the Meiosis package.
 
 ## Use cases:
 - Transformation of Image data
-- Expanding current image datasets.
+- Generation of small to mid-size image sets suitable for CV.
+- Generation of Synthetic data.
 
 ## Installation
 
@@ -42,6 +43,5 @@ for image in images:
 
 ## Future features:
 - External data source extraction
-- More custom copy-pipeline functions
-- Integration of OpenCV
+- Copy functionality
 - Customizability of export files
