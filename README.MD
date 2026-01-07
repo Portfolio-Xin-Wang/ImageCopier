@@ -37,7 +37,7 @@ images = export_api.read_from_directory()
 
 print("Exported images:")
 for image in images:
-    print(f"- {image}")
+    print(f"- {image}") 
 ```
 
 ## Future features:
