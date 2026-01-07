@@ -32,7 +32,7 @@ def test_copy_transformer_creates_4_copies_with_unique_names():
     # Arrange
     test_image = Image.open("tests/images/transform/test_copy_image1.jpg")
     composite: CopyTransformer = CopyTransformer(4)
-    image_entity = PILEntity(test_image, EntityInfo(label_id=0, name="test_copy_image1.jpg", location="test_images/"))
+    image_entity = PILEntity(test_image, EntityInfo(name="test_copy_image1.jpg", location="test_images/", target_director=""))
     existing_image_store = ImageFrame(images=[image_entity])
     # Act
     end_result: ImageFrame = composite.transform(existing_image_store)
@@ -48,7 +48,7 @@ def test_rotator_transformer_rotates_image():
     # Arrange
     test_image = Image.open("tests/images/transform/test_rotator_image1.jpg")
     composite: ImageTransformer = PILImageBuilder().reset().add_copies(2).add_rotation(2).build()
-    image_entity = PILEntity(test_image, EntityInfo(label_id=0, name="test_rotation_image1.jpg", location="test_images/"))
+    image_entity = PILEntity(test_image, EntityInfo(name="test_rotation_image1.jpg", location="test_images/", target_director=""))
     existing_image_store = ImageFrame(images=[image_entity])
     # Act
     end_result: ImageFrame = composite.transform(existing_image_store)
@@ -62,7 +62,7 @@ def test_return_name_post_transformations_format():
     # Arrange
     test_image = Image.open("tests/images/transform/test_rotator_image1.jpg")
     composite: ImageTransformer = PILImageBuilder().reset().add_copies(2).add_rotation(2).build()
-    image_entity = PILEntity(test_image, EntityInfo(label_id=0, name="test_rotation_image1.jpg", location="test_images/"))
+    image_entity = PILEntity(test_image, EntityInfo(name="test_rotation_image1.jpg", location="test_images/", target_director=""))
     existing_image_store = ImageFrame(images=[image_entity])
     # Act
     end_result: ImageFrame = composite.transform(existing_image_store)
@@ -70,10 +70,10 @@ def test_return_name_post_transformations_format():
     # Assert
     splitted1 = end_result.images_collection[0].return_image_name().split("&")
     splitted2 = end_result.images_collection[1].return_image_name().split("&")
-    
-    assert "1" == splitted1[1].split(";")[0]
-    assert "2" == splitted2[1].split(";")[0]
-    assert "copy" == splitted1[1].split(";")[1]
-    assert "copy" == splitted2[1].split(";")[1]
-    assert "rot" == splitted1[2].split(";")[1]
-    assert "rot" == splitted2[2].split(";")[1]
+
+    assert '1' == splitted1[0].split(";")[0]
+    assert '2' == splitted2[0].split(";")[0]
+    assert "copy" == splitted1[0].split(";")[1]
+    assert "copy" == splitted2[0].split(";")[1]
+    assert "rot" == splitted1[1].split(";")[1]
+    assert "rot" == splitted2[1].split(";")[1]

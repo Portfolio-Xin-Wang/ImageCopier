@@ -1,8 +1,7 @@
 from .image_exporter import LocalFileExporter
 from .image_handler import ImageHandler
 from .image_storage import LocalFileStorage
-from .mapping import ImageMapper, Mapper
-from .transformers import PILImageBuilder
+from .transformers import PILImageBuilder, MapTransformer
 
 
 class ImageServiceFactory:
@@ -11,7 +10,7 @@ class ImageServiceFactory:
     def __init__(self):
         self.transformer_builder = PILImageBuilder()
 
-    def create_pil_image_copier(self, copies: int = 1, rotation_base: int = 1, original_dir: str="test_images", output_dir: str = "output") -> LocalFileExporter:
+    def create_pil_image_copier(self, copies: int = 1, rotation_base: int = 1, original_dir: str="test_images", output_dir: str = "output", mapping: MapTransformer = None) -> LocalFileExporter:
         """
         This method creates an ImageCopier with 
         - LocalFileStorage as the image repository.
@@ -22,7 +21,7 @@ class ImageServiceFactory:
         # Add repository
         local_file_storage = LocalFileStorage(image_directory=original_dir)
         # Add transformers
-        transformers = self.transformer_builder.reset().add_copies(copies).add_rotation(rotation_base).build()
+        transformers = self.transformer_builder.reset().add_mapping(mapping).add_copies(copies).add_rotation(rotation_base).build()
         copier = ImageHandler(local_file_storage, transformers)
         # Build exporter
         exporter = LocalFileExporter(copier=copier, output_direction=output_dir)

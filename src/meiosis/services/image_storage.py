@@ -5,7 +5,7 @@ from pathlib import Path
 from PIL import Image
 
 from ..Domain import Entity, ImageFrame
-from .mapping import Mapper, ImageMapper
+from .mapping import ImageMapper, Mapper
 
 
 class IStorage(ABC):
@@ -50,36 +50,40 @@ class LocalFileStorage(IStorage):
         The assumption is that all images are located at the same directory.
         :return: List of ImageEntities. In the type of PILImageEntity
         """
-        file_names = os.listdir(self.image_directory)
-        image_names = self._filter_non_images(file_names)
-        transformed_images = self._format_images(image_names, self.image_directory)
+        # Start loop
+        transformed_images = self._enter_file("", self.image_directory)
         return ImageFrame(transformed_images)
     
+    def _enter_file(self, root: str, parent_directory: str) -> list:
+        entities = []
+        file_names = os.listdir(parent_directory)
+        # Perhaps a recursive loop.
+        for name in file_names:
+            exact_location = f"{parent_directory}/{name}"
+            file_entity = Path(exact_location)
+            # If name is a directory, enter and start loop.
+            extra_root = f"{root}/{name}"
+            if(file_entity.is_dir()):
+                # Append results into array
+                entities += self._enter_file(extra_root, exact_location)
+            # If name is an image, retrieve image and map data to entity, with the location, and target directory.
+            elif(self.IMAGE_FORMATS.get(file_entity.suffix)):
+                # name = file_entity.stem # Will need to be used in the future to seperate the name without its suffix
+                image_ent = Image.open(exact_location)
+                format_image = self._format(image=image_ent, 
+                                            name=name, 
+                                            exact_location=extra_root, 
+                                            target_dir=file_entity.parent.name, 
+                                            root=root)
+                entities.append(format_image)
+        return entities
+
     def set_mapper(self, mapper):
         return super().set_mapper(mapper)
 
-    def _format_images(self, names: list[str], source: str) -> list[Entity]:
-        """
-        Locates images in local file system.
-        Formats it in a image entity
-        :param images:
-        :return:
-        """
-        _pil_image = []
-        location = "{data_dir}/{name}"
-        for img_name in names:
-            image = Image.open(location.format(data_dir=source, name=img_name))
-            entity = self.mapper.map(img=image, img_name=img_name, source=source)
-            _pil_image.append(entity)
-        return _pil_image
-
-    def _filter_non_images(self, images: list[str]) -> list:
-        _images = []
-        for image in images:
-            # Future check if file with a extension is a directory or folder and a directory
-            file = Path(image)
-            is_image = self.IMAGE_FORMATS.get(file.suffix)
-            if is_image:
-                # Returns in format file_name.jpg for example
-                _images.append(file.name)
-        return _images
+    def _format(self, image, name: str, exact_location: str, target_dir: str, root: str):
+        # This means the current pointer is at the root folder level.
+        if root != "":
+            return self.mapper.map(img=image, img_name=name, source=exact_location, target=target_dir)
+        # If root is empty. 
+        return self.mapper.map(img=image, img_name=name, source=exact_location, target=root)

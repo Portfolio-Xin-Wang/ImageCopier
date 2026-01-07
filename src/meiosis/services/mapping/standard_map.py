@@ -5,16 +5,12 @@ from abc import ABC, abstractmethod
 class ImageMapper(ABC):
 
     @abstractmethod
-    def map(self, img: Image, img_name: str, source: str) -> Entity:
+    def map(self, img: Image, img_name: str, source: str, target: str) -> Entity:
         pass
 
 class Mapper(ImageMapper):
-    def map(self, img, img_name, source):
-        # Temp solution
-        label_id = map_name_to_id(img_name)
-        info = EntityInfo(name=img_name, location=source)
-        # Temp solution.
-        info.add_transformation("label", label_id)
+    def map(self, img, img_name, source, target):
+        info = EntityInfo(name=img_name, location=source, target_director=target)
         return PILEntity(img, info)
 
 class BreadMapper(ImageMapper):
@@ -23,7 +19,7 @@ class BreadMapper(ImageMapper):
     Replace it with the standard mapper or custom mapper
     """
 
-    def map(self, img, img_name, source):
+    def map(self, img, img_name, source, target):
         label_id = map_name_to_id(img_name)
         info = EntityInfo(label_id=label_id, name=img_name, location=source)
         return PILEntity(img, info)
