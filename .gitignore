@@ -1,5 +1,6 @@
 output
 test_images
+venv
 .history
 .vscode
 .dist
