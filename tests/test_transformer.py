@@ -1,6 +1,6 @@
 from PIL import Image
 
-from src.meiosis.Domain import EntityInfo, ImageFrame, PILEntity
+from src.meiosis.domain import EntityInfo, ImageFrame, PILEntity
 from src.meiosis.services.transformers import (CopyTransformer,
                                                ImageTransformer,
                                                PILImageBuilder,

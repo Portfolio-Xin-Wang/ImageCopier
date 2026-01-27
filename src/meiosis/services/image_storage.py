@@ -4,7 +4,7 @@ from pathlib import Path
 
 from PIL import Image
 
-from ..Domain import Entity, ImageFrame
+from ..domain import Entity, ImageFrame
 from .mapping import ImageMapper, Mapper
 
 

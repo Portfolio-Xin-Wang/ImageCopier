@@ -1,4 +1,4 @@
-from ...Domain import ImageFrame, Entity, PILEntity, EntityInfo, map_name_to_id
+from ...domain import ImageFrame, Entity, PILEntity, EntityInfo, map_name_to_id
 from .transformer import Transformer
 
 class MapTransformer(Transformer):

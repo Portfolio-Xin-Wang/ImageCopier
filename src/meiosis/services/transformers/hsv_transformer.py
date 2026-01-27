@@ -1,4 +1,4 @@
-from ...Domain import PILEntity
+from ...domain import PILEntity
 from .transformer import Transformer
 
 

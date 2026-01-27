@@ -1,5 +1,5 @@
 from .api.export import Export
-from .Domain import ImageFrame, PILEntity
+from .domain import ImageFrame, PILEntity
 from .services.image_exporter import Exporter, LocalFileExporter
 from .services.image_handler import ImageHandler
 from .services.image_storage import IStorage, LocalFileStorage

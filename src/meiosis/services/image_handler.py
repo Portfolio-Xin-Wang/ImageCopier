@@ -1,4 +1,4 @@
-from ..Domain import ImageFrame
+from ..domain import ImageFrame
 from .image_storage import IStorage
 from .transformers import ImageTransformer
 

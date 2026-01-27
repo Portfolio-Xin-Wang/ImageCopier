@@ -1,5 +1,5 @@
 from PIL import Image
-from ...Domain import Entity, PILEntity, EntityInfo, map_name_to_id
+from ...domain import Entity, PILEntity, EntityInfo, map_name_to_id
 from abc import ABC, abstractmethod
 
 class ImageMapper(ABC):
