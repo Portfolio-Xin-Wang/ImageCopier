@@ -1,4 +1,4 @@
-# Meiosis 0.1.5
+# Meiosis 0.1.6
 Meiosis is a Python package for creating new Images, usable for generating extra image data for ML-workflows.
 Thank you for using the Meiosis package.
 
