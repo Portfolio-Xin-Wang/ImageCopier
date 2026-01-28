@@ -1,7 +1,7 @@
 import os
 from abc import ABC, abstractmethod
 
-from ..Domain import Entity, PILEntity, ImageFrame
+from ..domain import Entity, PILEntity, ImageFrame
 from .image_handler import ImageHandler
 
 

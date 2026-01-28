@@ -1,6 +1,6 @@
 from ..services.meiosis_factory import ImageServiceFactory
 from ..services.transformers import MapTransformer
-from ..Domain import ImageFrame
+from ..domain import ImageFrame
 
 class Export:
 

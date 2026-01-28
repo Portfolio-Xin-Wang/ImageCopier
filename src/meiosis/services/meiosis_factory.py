@@ -21,7 +21,7 @@ class ImageServiceFactory:
         # Add repository
         local_file_storage = LocalFileStorage(image_directory=original_dir)
         # Add transformers
-        transformers = self.transformer_builder.reset().add_mapping(mapping).add_copies(copies).add_rotation(rotation_base).build()
+        transformers = self.transformer_builder.reset().add_mapping(mapping).add_copies(copies).add_rotation(rotation_base).hsv_transform().build()
         copier = ImageHandler(local_file_storage, transformers)
         # Build exporter
         exporter = LocalFileExporter(copier=copier, output_direction=output_dir)

@@ -1,6 +1,6 @@
 import random
 
-from ...Domain import PILEntity
+from ...domain import PILEntity
 from .transformer import Transformer
 
 
@@ -14,7 +14,8 @@ class RotatorTransformer(Transformer):
         for image in image_store.images_collection:
             image: PILEntity
             angle = self._generate_random_angle()
-            image.image.rotate(angle)
+            rot_img = image.image.rotate(angle)
+            image.image = rot_img
             image.meta_data.add_transformation("rot", angle)
         return image_store
     

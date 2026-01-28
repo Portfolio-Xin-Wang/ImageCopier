@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from ...Domain import ImageFrame
+from ...domain import ImageFrame
 
 
 class Transformer(ABC):
