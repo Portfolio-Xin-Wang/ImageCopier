@@ -1,6 +1,5 @@
 # Meiosis 0.1.6
 Meiosis is a Python package for creating new Images, usable for generating extra image data for ML-workflows.
-Thank you for using the Meiosis package.
 
 *Warning: This package is currently in alpha state, methods and its input parameters might be subject to change.*
 
@@ -8,6 +7,12 @@ Thank you for using the Meiosis package.
 - Transformation of Image data
 - Generation of small to mid-size image sets suitable for CV.
 - Generation of Synthetic data.
+
+## Software design and architecture:
+This tool utilizes a n-tier architecture:
+- Entities as the domain layer.
+- Service layer, handling business logic.
+- API, usable for the users of this  package.
 
 ## Installation
 
