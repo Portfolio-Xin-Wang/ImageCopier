@@ -2,9 +2,13 @@ name: Continuous Integration for Meiosis
 
 on:
   push:
-    branches: ["main", "dev"]
+    branches:
+      - main, dev
   pull_request:
-    branches: ["main", "dev"]
+    branches:
+      - main, dev
+  release:
+    types: [published]
 
 jobs:
   tests:
