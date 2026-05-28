@@ -1,3 +1,5 @@
+from __future__ import annotations  # <-- ADD THIS LINE FIRST
+
 from abc import ABC, abstractmethod
 
 from numpy import array, ndarray
