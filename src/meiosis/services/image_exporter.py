@@ -1,8 +1,8 @@
 import os
 from abc import ABC, abstractmethod
 
-from ..domain import Entity, PILEntity, ImageFrame
-from .image_handler import ImageHandler
+from src.meiosis.Domain import Entity, PILEntity, ImageFrame
+from src.meiosis.services.image_handler import ImageHandler
 
 
 class Exporter(ABC):
