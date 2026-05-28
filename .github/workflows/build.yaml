@@ -25,6 +25,7 @@ jobs:
         run: |
           python -m pip install -r requirements.txt
           poetry install
+          echo "Building distributions with Poetry..."
           poetry build
       # Upload distributions as artifacts.
       - name: Upload distributions
