@@ -1,9 +1,12 @@
 output
 test_images
 venv
+*venv
 .history
 .vscode
-.dist
+dist
 *.ipynb
 .env
 .coverage
+.pytest_cache
+__pycache__
