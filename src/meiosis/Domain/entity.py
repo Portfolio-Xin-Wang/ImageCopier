@@ -46,7 +46,7 @@ class PILEntity(Entity):
     def return_image_name(self) -> str:
         return self.meta_data.return_name()
 
-    def deep_copy(self) -> PILEntity:
+    def deep_copy(self) -> Entity:
         new_meta = EntityInfo(
            name=self.meta_data.name, location=self.meta_data.location, target_director=self.meta_data.target_director
         )
