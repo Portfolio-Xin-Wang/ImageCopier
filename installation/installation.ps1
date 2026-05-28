@@ -1,7 +1,7 @@
 # Check if Antvenv is installed
 if (-not(Test-Path -Path "./antvenv")) {
     Write-Host "Antvenv is not installed. Installing Antvenv..."
-    py -m venv ./antvenv
+    python -m venv ./antvenv
 }
 Write-Host "Antvenv is already installed. Start activating virtual environment."
 # Activate the virtual environment
