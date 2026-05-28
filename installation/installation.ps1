@@ -13,5 +13,8 @@ python.exe -m pip install --upgrade pip
 # Install poetry
 pip install poetry
 
+# Install twine
+pip install twine
+
 # Install all dependencies from pyproject.toml
 poetry install

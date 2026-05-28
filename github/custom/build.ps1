@@ -1,3 +1,3 @@
 poetry build
 
-twine upload dist/*
+# twine upload dist/* --repository pypi
