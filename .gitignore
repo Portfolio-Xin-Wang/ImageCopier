@@ -8,5 +8,5 @@ dist
 *.ipynb
 .env
 .coverage
-.pytest_cache
-__pycache__
+*.pytest_cache
+*__pycache__
