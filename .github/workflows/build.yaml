@@ -1,9 +1,6 @@
 name: Upload Latest Meiosis build.
 
 on:
-  push:
-    branches:
-      - main
   release:
     types: [published]
 
