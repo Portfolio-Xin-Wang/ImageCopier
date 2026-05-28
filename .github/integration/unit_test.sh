@@ -1,2 +1,2 @@
 echo "Running unit tests..."
-pytest
+poetry run pytest -v --cov=src --cov-report=xml --cov-report=html
