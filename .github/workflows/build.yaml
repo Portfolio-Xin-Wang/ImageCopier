@@ -22,11 +22,13 @@ jobs:
           python-version: '3.12'
       # Intstall dependencies.
       - name: Run installation script
+        shell: pwsh
         run: |
           ./installation/installation.ps1
       
       # Build the project.
       - name: Run build script
+        shell: pwsh
         run: |
           ./github/custom/build.ps1
       # Upload distributions as artifacts.
