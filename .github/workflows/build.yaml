@@ -1,6 +1,10 @@
 name: Upload Latest Meiosis build.
 
 on:
+  workflow_run:
+    workflows: ["Continuous Integration for Meiosis"]
+    branches: [main, dev]
+    types: [completed]
   release:
     types: [published]
 
@@ -11,6 +15,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    if: github.event.workflow_run.conclusion == 'success' || github.event_name == 'release'
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python
