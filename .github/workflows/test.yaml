@@ -16,13 +16,11 @@ jobs:
         with:
           python-version: '3.12'
       # Install dependencies using installation script
-      - name: Install dependencies
+      - name: Install and run tests
         run: |
           chmod +x ./installation/installation.sh
           ./installation/installation.sh
-      # Run tests
-      - name: Run unit tests
-        run: |
           echo "Running tests with pytest..."
           chmod +x ./.github/integration/unit_test.sh
           ./.github/integration/unit_test.sh
+          
