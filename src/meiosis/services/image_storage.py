@@ -56,7 +56,7 @@ class LocalFileStorage(IStorage):
     
     def _enter_file(self, root: str, parent_directory: str) -> list:
         entities = []
-        file_names = os.listdir(parent_directory)
+        file_names = sorted(os.listdir(parent_directory))
         # Perhaps a recursive loop.
         for name in file_names:
             exact_location = f"{parent_directory}/{name}"
