@@ -5,7 +5,7 @@ if (-not(Test-Path -Path "./antvenv")) {
 }
 Write-Host "Antvenv is already installed. Start activating virtual environment."
 # Activate the virtual environment
-antvenv\Scripts\Activate.ps1
+./antvenv/Scripts/Activate.ps1
 
 # Upgrade pip.
 python.exe -m pip install --upgrade pip
