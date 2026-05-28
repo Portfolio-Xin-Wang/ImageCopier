@@ -1,4 +1,4 @@
-from src.meiosis.Domain import ImageFrame, Entity, PILEntity, EntityInfo, map_name_to_id
+from src.meiosis.Domain import map_name_to_id
 from .transformer import Transformer
 
 class MapTransformer(Transformer):

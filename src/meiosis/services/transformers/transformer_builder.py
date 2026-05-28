@@ -1,10 +1,13 @@
+from __future__ import annotations
+
 from abc import ABC, abstractmethod
 
 from .copy_component import CopyTransformer
-from .mapping_component import MapTransformer
-from .image_transformer import ImageTransformer
-from .rotator_component import RotatorTransformer
 from .hsv_transformer import HSVTransformer
+from .image_transformer import ImageTransformer
+from .mapping_component import MapTransformer
+from .rotator_component import RotatorTransformer
+
 
 class TransformerBuilder(ABC):
     # Possible implementations:

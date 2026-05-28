@@ -1,4 +1,7 @@
+from __future__ import annotations
+
 from src.meiosis.Domain import PILEntity
+
 from .transformer import Transformer
 
 
