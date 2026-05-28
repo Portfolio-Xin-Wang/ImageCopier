@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from ...domain import ImageFrame
+from src.meiosis.Domain import ImageFrame
 
 
 class Transformer(ABC):

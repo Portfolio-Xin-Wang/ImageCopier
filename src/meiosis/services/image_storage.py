@@ -4,7 +4,7 @@ from pathlib import Path
 
 from PIL import Image
 
-from ..domain import Entity, ImageFrame
+from src.meiosis.Domain import Entity, ImageFrame
 from .mapping import ImageMapper, Mapper
 
 

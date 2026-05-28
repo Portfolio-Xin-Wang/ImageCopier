@@ -1,4 +1,4 @@
-from ...domain import ImageFrame
+from src.meiosis.Domain import ImageFrame
 from .transformer import Transformer
 
 

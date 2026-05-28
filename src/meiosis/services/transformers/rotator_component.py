@@ -1,6 +1,6 @@
 import random
 
-from ...domain import PILEntity
+from src.meiosis.Domain import PILEntity
 from .transformer import Transformer
 
 
