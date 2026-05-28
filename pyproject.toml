@@ -20,6 +20,9 @@ dependencies = [
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
 
+[tool.poetry]
+packages = [{include = "src"}]
+
 [project.urls]
 Homepage = "https://github.com/Portfolio-Xin-Wang/ImageCopier"
 Issues = "https://github.com/Portfolio-Xin-Wang/ImageCopier/issues"
